@@ -7,8 +7,12 @@ import org.joda.time.format.DateTimeFormat
 
 class DateParser {
     def String parse(time) {
-        def printableTime = new DateTime(time.toString())
-        def format = DateTimeFormat.forPattern('MM/dd/yyyy - hh:mm aa')
-        return printableTime.toString(format)
+        if (!time)
+            throw new IllegalArgumentException()
+
+        use(DateTimeCategory) {
+            def printableTime = new DateTime(time.toString())
+            printableTime.createPrintableTime()
+        }
     }
 }

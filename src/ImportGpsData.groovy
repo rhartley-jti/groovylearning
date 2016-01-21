@@ -10,12 +10,16 @@ def gpx = slurper.parse(file)
  found an error is not thrown, just no data returned.
  */
 
-println gpx.name
-println ''
-println gpx.desc
-println ''
-println gpx.@version
-println gpx.@creator
+gpx.with {
+    println name
+    println ''
+
+    println desc
+    println ''
+
+    println attributes()['version']
+    println attributes()['creator']
+}
 
 gpx.rte.rtept.each {
     println it.@log
